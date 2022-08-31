@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using WeatherForecastAPI.Interfaces;
 
 namespace WeatherForecastAPI.Controllers
 {
@@ -12,15 +13,18 @@ namespace WeatherForecastAPI.Controllers
     };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly IPlaceService _asasas;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IPlaceService asasas)
         {
             _logger = logger;
+            _asasas = asasas;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        public async Task<IEnumerable<WeatherForecast>> Get()
         {
+            var asda = await _asasas.GetPlacesAsync("https://api.meteo.lt/v1/places");
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
