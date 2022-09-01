@@ -14,10 +14,10 @@ builder.Services.AddDbContext<WeatherForecastAPIContext>(options =>
     options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
 });
 
-builder.Services.AddHostedService<BackgroundWorkerService>();
+builder.Services.AddHostedService<ExecuteWeeklyBackgroundService>();
 builder.Services.AddScoped<IPlaceRepository, PlaceRepository>();
-builder.Services.AddScoped<IPlaceDescriptionRepository, PlaceDescriptionRepository>();
 builder.Services.AddScoped<IPlaceService, PlaceService>();
+builder.Services.AddScoped<ForecastService>();
 builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddControllers();

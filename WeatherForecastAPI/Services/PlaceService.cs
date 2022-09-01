@@ -6,8 +6,17 @@ namespace WeatherForecastAPI.Services
 {
     public class PlaceService : IPlaceService
     {
+        private readonly IConfiguration _configuration;
+
+        public PlaceService(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         public async Task<IEnumerable<PlaceDto>> GetPlacesAsync(string url)
         {
+            string placeUrl = _configuration["ApiEndpoints:Place"];
+
             using (HttpClient client = new HttpClient())
             {
                 var response = await client.GetStreamAsync(url);

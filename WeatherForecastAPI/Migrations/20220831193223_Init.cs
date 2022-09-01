@@ -23,7 +23,7 @@ namespace WeatherForecastAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PlaceDescription",
+                name: "Places",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -37,51 +37,24 @@ namespace WeatherForecastAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PlaceDescription", x => x.Id);
+                    table.PrimaryKey("PK_Places", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PlaceDescription_Coordinates_CoordinatesId",
+                        name: "FK_Places_Coordinates_CoordinatesId",
                         column: x => x.CoordinatesId,
                         principalTable: "Coordinates",
                         principalColumn: "Id");
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Places",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PlaceDescriptionId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Places", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Places_PlaceDescription_PlaceDescriptionId",
-                        column: x => x.PlaceDescriptionId,
-                        principalTable: "PlaceDescription",
-                        principalColumn: "Id");
-                });
-
             migrationBuilder.CreateIndex(
-                name: "IX_PlaceDescription_CoordinatesId",
-                table: "PlaceDescription",
-                column: "CoordinatesId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Places_PlaceDescriptionId",
+                name: "IX_Places_CoordinatesId",
                 table: "Places",
-                column: "PlaceDescriptionId");
+                column: "CoordinatesId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Places");
-
-            migrationBuilder.DropTable(
-                name: "PlaceDescription");
 
             migrationBuilder.DropTable(
                 name: "Coordinates");

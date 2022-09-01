@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using WeatherForecastAPI.DTO_s;
-using WeatherForecastAPI.Models;
 
 namespace WeatherForecastAPI.Profiles
 {
@@ -8,7 +6,15 @@ namespace WeatherForecastAPI.Profiles
     {
         public PlaceProfile()
         {
-            CreateMap<PlaceDto, Place>();
+            // CreateMap<PlaceDescriptionDto, Place>().ForMember(;
+
+
+            //.ForMember(dest => dest.Coordinates, opt => opt.MapFrom(c => c.Coordinates));
+
+
+            //  CreateMap<DomainClass, Child>();
+            //   CreateMap<DomainClass, Parent>()
+            //    .ForMember(d => d.Child, opt => opt.MapFrom(s => s));
         }
     }
 }

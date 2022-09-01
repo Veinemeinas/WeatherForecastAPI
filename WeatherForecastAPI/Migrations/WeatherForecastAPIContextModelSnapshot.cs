@@ -49,27 +49,6 @@ namespace WeatherForecastAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Code")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("PlaceDescriptionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PlaceDescriptionId");
-
-                    b.ToTable("Places");
-                });
-
-            modelBuilder.Entity("WeatherForecastAPI.Models.PlaceDescription", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
                     b.Property<string>("AdministrativeDivision")
                         .HasColumnType("nvarchar(max)");
 
@@ -92,19 +71,10 @@ namespace WeatherForecastAPI.Migrations
 
                     b.HasIndex("CoordinatesId");
 
-                    b.ToTable("PlaceDescription");
+                    b.ToTable("Places");
                 });
 
             modelBuilder.Entity("WeatherForecastAPI.Models.Place", b =>
-                {
-                    b.HasOne("WeatherForecastAPI.Models.PlaceDescription", "PlaceDescription")
-                        .WithMany()
-                        .HasForeignKey("PlaceDescriptionId");
-
-                    b.Navigation("PlaceDescription");
-                });
-
-            modelBuilder.Entity("WeatherForecastAPI.Models.PlaceDescription", b =>
                 {
                     b.HasOne("WeatherForecastAPI.Models.Coordinates", "Coordinates")
                         .WithMany()
