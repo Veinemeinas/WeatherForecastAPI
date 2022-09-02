@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WeatherForecastAPI.DTO_s;
 using WeatherForecastAPI.Interfaces;
 
 namespace WeatherForecastAPI.Controllers
@@ -35,6 +36,14 @@ namespace WeatherForecastAPI.Controllers
             {
                 return NotFound();
             }
+            return Ok(places);
+        }
+
+        [HttpPost]
+        [Route("GetNearestPlaces")]
+        public async Task<IActionResult> GetNearestPlaces(CoordinatesDto coordinates)
+        {
+            var places = await _placeRepository.GetNearestPlacesAsync(coordinates);
             return Ok(places);
         }
 
